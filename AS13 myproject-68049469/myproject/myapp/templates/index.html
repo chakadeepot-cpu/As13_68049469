@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Burger Lab - รายชื่อประชากร</title>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4" style="font-family: 'Righteous', sans-serif; color: #b22222; letter-spacing: 2px;">
+        🍔 LAB DATA RECORDS
+    </h2>
+
+    <div class="row mb-4 justify-content-center">
+        <div class="col-md-6">
+            <form action="" method="GET" class="input-group shadow-sm">
+                <input class="form-control" type="search" name="q" 
+                       placeholder="ค้นหาชื่อหรืออายุประชากร..." 
+                       aria-label="Search" 
+                       value="{{ request.GET.q }}">
+                <button class="btn btn-danger" type="submit" style="background-color: #b22222; border: none;">
+                    <i class="bi bi-search"></i> ค้นหา
+                </button>
+                <a href="/" class="btn btn-outline-secondary">ล้างค่า</a>
+            </form>
+        </div>
+    </div>
+
+    <div class="table-responsive shadow-sm rounded">
+        <table class="table table-hover text-center align-middle bg-white">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">รหัส</th>
+                    <th scope="col">ชื่อประชากร</th>
+                    <th scope="col">อายุ</th>
+                    <th scope="col">วันที่บันทึก</th>
+                    <th scope="col">การจัดการ</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for person in all_person %}
+                <tr>
+                    <th scope="row" class="text-secondary">{{ person.id }}</th>
+                    <td class="fw-bold">{{ person.name }}</td>
+                    <td>{{ person.age }} ปี</td>
+                    <td>{{ person.date|date:"j F Y" }}</td>
+                    <td>
+                        <div class="d-flex gap-2 justify-content-center">
+                            
+                            <a href="/edit/{{ person.id }}/" class="btn shadow-sm" 
+                               style="background-color: #eb0b0b; color: white; min-width: 80px; border: none;">
+                                แก้ไข
+                            </a>
+
+                            <a href="/delete/{{ person.id }}/" class="btn shadow-sm" 
+                               style="background-color: #ff8c00; color: white; min-width: 80px; border: none;"
+                               onclick="return confirm('คุณแน่ใจหรือไม่ว่าต้องการลบข้อมูลของ {{ person.name }}?')">
+                                ลบ
+                            </a>
+
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="py-4 text-muted italic">
+                        <i class="bi bi-exclamation-circle"></i> ไม่พบข้อมูลในระบบ Burger Lab
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="/form/" class="btn btn-lg btn-success shadow" style="border-radius: 30px; padding-left: 30px; padding-right: 30px;">
+            เพิ่มข้อมูลใหม่ +
+        </a>
+    </div>
+</div>
+{% endblock %}

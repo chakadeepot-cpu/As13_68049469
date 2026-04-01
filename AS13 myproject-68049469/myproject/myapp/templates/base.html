@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <title>{% block title %}Burger Lab{% endblock %}</title>
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+
+        /* พื้นหลัง: เปลี่ยนเป็นสีครีมอุ่นๆ และปรับสี SVG ให้เป็นโทนส้ม/แดงอ่อน */
+        background-color: #fffaf0;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23e67e22' fill-opacity='0.15'%3E%3Cpath d='M24.37 16c.2.65.39 1.32.54 2H21.17l1.17 2.34.45.9-.24.11V28a5 5 0 0 1-2.23 8.94l-.02.06a8 8 0 0 1-7.75 6h-20a8 8 0 0 1-7.74-6l-.02-.06A5 5 0 0 1-17.45 28v-6.76l-.79-1.58-.44-.9.9-.44.63-.32H-20a23.01 23.01 0 0 1 44.37-2zm-36.82 2a1 1 0 0 0-.44.1l-3.1 1.56.89 1.79 1.31-.66a3 3 0 0 1 2.69 0l2.2 1.1a1 1 0 0 0 .9 0l2.21-1.1a3 3 0 0 1 2.69 0l2.2 1.1a1 1 0 0 0 .9 0l2.21-1.1a3 3 0 0 1 2.69 0l2.2 1.1a1 1 0 0 0 .86.02l2.88-1.27a3 3 0 0 1 2.43 0l2.88 1.27a1 1 0 0 0 .85-.02l3.1-1.55-.89-1.79-1.42.71a3 3 0 0 1-2.56.06l-2.77-1.23a1 1 0 0 0-.4-.09h-.01a1 1 0 0 0-.4.09l-2.78 1.23a3 3 0 0 1-2.56-.06l-2.3-1.15a1 1 0 0 0-.45-.11h-.01a1 1 0 0 0-.44.1l-2.21 1.11a3 3 0 0 1-2.69 0l-2.2-1.1a1 1 0 0 0-.45-.11h-.01a1 1 0 0 0-.44.1l-2.21 1.11a3 3 0 0 1-2.69 0l-2.2-1.1a1 1 0 0 0-.45-.11h-.01zm0-2h-4.9a21.01 21.01 0 0 1 39.61 0h-2.09l-.06-.13-.26.13h-32.31zm30.35 7.68l1.36-.68h1.3v2h-36v-1.15l.34-.17 1.36-.68h2.59l1.36.68a3 3 0 0 0 2.69 0l1.36-.68h2.59l1.36.68a3 3 0 0 0 2.69 0L2.26 23h2.59l1.36.68a3 3 0 0 0 2.56.06l1.67-.74h3.23l1.67.74a3 3 0 0 0 2.56-.06zM-13.82 27l16.37 4.91L18.93 27h-32.75zm-.63 2h.34l16.66 5 16.67-5h.33a3 3 0 1 1 0 6h-34a3 3 0 1 1 0-6zm1.35 8a6 6 0 0 0 5.65 4h20a6 6 0 0 0 5.66-4H-13.1z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        min-height: 100vh;
+    }
+
+    /* ===== Navbar: สีแดงเข้ม (Burgundy/Red) ===== */
+    .navbar {
+        background-color: #b22222; 
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .navbar-brand {
+        font-family: 'Righteous', cursive;
+        font-size: 24px;
+        color: #ffcc00 !important; /* สีเหลืองมัสตาร์ด */
+        letter-spacing: 2px;
+    }
+
+    .nav-btn {
+        background-color: #ffcc00;
+        color: #222 !important;
+        border-radius: 8px; /* เปลี่ยนเป็นเหลี่ยมมนเล็กน้อย ให้ดูเท่ขึ้น */
+        padding: 6px 20px;
+        font-weight: 600;
+        transition: 0.3s;
+        border: none;
+    }
+
+    .nav-btn:hover {
+        background-color: #e6b800;
+        transform: scale(1.05);
+    }
+
+    /* ===== HERO IMAGE: เปลี่ยนเป็นรูปเบอร์เกอร์ ===== */
+    .hero {
+        height: 400px;
+        background: 
+            linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+            url("https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=2072&auto=format&fit=crop");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border-bottom: 5px solid #ffcc00;
+    }
+
+    .hero-overlay h1 {
+        font-family: 'Righteous', cursive;
+        color: #ffcc00;
+        font-size: 48px;
+        text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+    }
+
+    /* ===== Card กลางจอ ===== */
+    .main-card {
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 20px;
+        border-left: 8px solid #b22222; /* แถบสีแดงด้านซ้าย */
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        margin-top: -50px; /* ให้ Card ทับเลเยอร์รูป Hero เล็กน้อย */
+        margin-bottom: 60px;
+        position: relative;
+        z-index: 10;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+        background-color: #222;
+        color: #ffcc00;
+        padding: 30px 0;
+        text-align: center;
+        border-top: 5px solid #b22222;
+    }
+</style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">🍔 BURGER LAB</a>
+        <div>
+            <a class="nav-btn me-2" href="/">HOME</a>
+            <a class="nav-btn me-2" href="/about">MENU</a>
+            <a class="nav-btn" href="/form">LOGIN</a>
+        </div>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="hero-overlay">
+        <h1>"STAY HUNGRY, EAT BETTER."</h1>
+    </div>
+</section>
+
+<div class="container">
+    <div class="main-card">
+        {% block content %}
+        <h2 class="text-center mb-4">Welcome to the Lab</h2>
+        <p class="text-center">ทดลองสูตรความอร่อยใหม่ๆ ที่คุณไม่เคยสัมผัสมาก่อน</p>
+        {% endblock %}
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <h5 style="font-family: 'Righteous';">BURGER LAB</h5>
+        <small>© 2026 The Best Burger in Town. All Rights Reserved</small>
+    </div>
+</footer>
+
+</body>
+</html>

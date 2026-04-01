@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}
+หน้าแรกของเว็บไซต์
+{% endblock %}
+
+{% block content %}
+
+<style>
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+.gallery img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.gallery img:hover {
+    transform: scale(1.05);
+}
+</style>
+
+<h2 class="text-center mb-4" style="font-family: 'Righteous'; color: #b22222;">🍔 OUR BURGER EXPERIMENTS</h2>
+
+<div class="gallery">
+    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1000&auto=format&fit=crop" alt="Burger 1">
+    <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1000&auto=format&fit=crop" alt="Burger 2">
+    <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=1000&auto=format&fit=crop" alt="Burger 3">
+    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1000&auto=format&fit=crop" alt="Burger 4">
+    <img src="https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?q=80&w=1000&auto=format&fit=crop" alt="Burger 5">
+    <img src="https://images.unsplash.com/photo-1596662951482-0c4ba74a6df6?q=80&w=1000&auto=format&fit=crop" alt="Burger 6">
+    <img src="https://images.unsplash.com/photo-1520072959219-c595dc870360?q=80&w=1000&auto=format&fit=crop" alt="Burger 7">
+    <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?q=80&w=1000&auto=format&fit=crop" alt="Burger 8">
+    <img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?q=80&w=1000&auto=format&fit=crop" alt="Burger 9">
+</div>
+
+{% endblock %}
